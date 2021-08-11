@@ -1,0 +1,16 @@
+{% extends 'taskapp/base.html' %}
+
+{% block title %}
+アップデート
+{% endblock title %}
+
+{% block content %}
+    <h1>アップデート</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" name="Update task">
+    </form>
+
+{% endblock content %}

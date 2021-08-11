@@ -1,0 +1,29 @@
+{% extends 'taskapp/base.html' %}
+
+{% block title %}
+タスクリスト
+{% endblock title %}
+
+{% block content %}
+    <h1>タスク</h1>
+
+    <form method="POST" action="/">
+        {% csrf_token %}
+        {{form.title}}
+        <input type="submit" name="Create Task">
+    </form>
+
+    {% comment %} tasklistはviewで定義したもの {% endcomment %}
+    {% comment %} tasklistにデータがあるかぎりループする {% endcomment %}
+    {% for task in tasklist %}
+        <div>
+            <a href={% url 'update_task' task.id %}>更新</a>
+            <a href={% url 'delete' task.id %}>削除</a>
+            {% if task.complete == True %}
+                <strike>{{ task }}</strike>
+            {% else %}
+                <span>{{ task }}</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock content %}
